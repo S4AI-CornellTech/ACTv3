@@ -1,0 +1,13 @@
+# Diode emission factors
+
+# Units: kg CO2e per kg of diode material
+
+# Glass diode for surface mounting
+# Dataset: market for diode, glass-, for surface-mounting
+# Source: https://ecoquery.ecoinvent.org/3.11/cutoff/dataset/63/documentation
+glass_smd: 250.9863928 kg / kg
+
+# Light emitting diode (LED)
+# Dataset: market for light emitting diode
+# Source: https://ecoquery.ecoinvent.org/3.11/cutoff/dataset/946/documentation
+led: 249.1912347 kg / kg

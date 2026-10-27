@@ -1,0 +1,7 @@
+# Active semiconductor component emission factors
+# Units: kg CO2e per kg of component material
+
+# Generic active semiconductor (unspecified)
+# Dataset: market for electronic component, active, unspecified
+# Source: https://ecoquery.ecoinvent.org/3.11/cutoff/dataset/4729/documentation
+generic: 121 kg / kg

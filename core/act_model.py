@@ -19,7 +19,6 @@ from act.core.metrics.cost_analyzer import CostAnalyzer
 from act.core.metrics.metric_analyzer import MetricAnalyzer
 from act.core.models.ap_model import APModel, DEFAULT_AP_CONFIG
 from act.core.models.battery_model import BatteryModel, DEFAULT_BATTERY_CONFIG
-from act.core.models.capacitor_model import CapacitorModel, DEFAULT_CP_CONFIG
 from act.core.models.ci_model import CIModel
 from act.core.models.dram_model import DEFAULT_DRAM_CONFIG, DRAMModel
 from act.core.models.hdd_model import DEFAULT_HDD_CONFIG, HDDModel
@@ -28,6 +27,16 @@ from act.core.models.logic_model import LogicModel
 from act.core.models.manual_model import ManualModel
 from act.core.models.materials_model import DEFAULT_MATERIALS_CONFIG, MaterialsModel
 from act.core.models.op_model import OpModel
+from act.core.models.others_model import GenericActiveModel, GenericPassiveModel
+from act.core.models.passives_model import (
+    CapacitorModel,
+    ConnectorModel,
+    DEFAULT_CP_CONFIG,
+    DiodeModel,
+    InductorModel,
+    ResistorModel,
+    TransistorModel,
+)
 from act.core.models.pcb_model import PCBModel
 from act.core.models.ssd_model import SSDModel
 from act.core.scaling.apply_ci_scaling import apply_ci_scaling
@@ -113,6 +122,13 @@ class ACTModel:
         self.hdd_model = HDDModel(model_files=hdd_config)
         self.op_model = OpModel(ci_model=self.ci_model, use_legacy=self.use_legacy)
         self.cap_model = CapacitorModel(model_file=cap_config, ci_model=self.ci_model)
+        self.resistor_model = ResistorModel()
+        self.inductor_model = InductorModel()
+        self.diode_model = DiodeModel()
+        self.connector_model = ConnectorModel()
+        self.transistor_model = TransistorModel()
+        self.generic_active_model = GenericActiveModel()
+        self.generic_passive_model = GenericPassiveModel()
         self.materials_model = MaterialsModel(model_file=materials_config)
         self.ap_model = APModel(model_file=ap_config)
         self.imec_logic_model = IMECLogicModel()
@@ -290,6 +306,20 @@ class ACTModel:
                 emb_carbon = self.manual_model.get_carbon(device_data)
             elif device_data.model is ModelType.CAPACITOR:
                 emb_carbon = self.cap_model.get_carbon(device_data)
+            elif mtype is ModelType.RESISTOR:
+                emb_carbon = self.resistor_model.get_carbon(device_data)
+            elif mtype is ModelType.INDUCTOR:
+                emb_carbon = self.inductor_model.get_carbon(device_data)
+            elif mtype is ModelType.DIODE:
+                emb_carbon = self.diode_model.get_carbon(device_data)
+            elif mtype is ModelType.CONNECTOR:
+                emb_carbon = self.connector_model.get_carbon(device_data)
+            elif mtype is ModelType.TRANSISTOR:
+                emb_carbon = self.transistor_model.get_carbon(device_data)
+            elif mtype is ModelType.ACTIVE:
+                emb_carbon = self.generic_active_model.get_carbon(device_data)
+            elif mtype is ModelType.PASSIVE:
+                emb_carbon = self.generic_passive_model.get_carbon(device_data)
             elif device_data.model is ModelType.MATERIALS:
                 emb_carbon = self.materials_model.get_carbon(device_data)
             elif device_data.model is ModelType.PCB:

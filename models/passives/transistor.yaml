@@ -1,0 +1,7 @@
+# Transistor emission factors
+# Units: kg CO2e per kg of transistor material
+
+# Transistor (BJT or MOSFET), surface-mounted
+# Dataset: market for transistor, surface-mounted
+# Source: https://ecoquery.ecoinvent.org/3.11/cutoff/dataset/5326/documentation
+generic: 171.3662879 kg / kg

@@ -1,0 +1,15 @@
+# Resistor emission factors by package type
+# Source: Delta LCA (https://dl.acm.org/doi/epdf/10.1145/3643561), Table 2
+# Units: kg CO2e per resistor (by package size)
+
+# Package type 0201
+"0201": 0.00001 kg  
+
+# Package type 0402
+"0402": 0.00004 kg  
+
+# Package type 0603
+"0603": 0.00012 kg  
+
+# Package type 0805
+"0805": 0.0006 kg  

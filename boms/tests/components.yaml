@@ -1,0 +1,51 @@
+name: Discrete components test bill of material
+description: One device per discrete component model type
+devices:
+  res_0402:
+    model: resistor
+    type: "0402"
+    n_ics: 10
+  ind_0603:
+    model: inductor
+    type: "0603"
+    n_ics: 4
+  ind_choke:
+    model: inductor
+    type: weight_based
+    weight: 1 g
+    n_ics: 1
+  led:
+    model: diode
+    type: led
+    weight: 0.02 g
+    n_ics: 5
+  diode_smd:
+    model: diode
+    type: glass_smd
+    weight: 0.01 g
+    n_ics: 2
+  conn_pcie:
+    model: connector
+    type: pci
+    weight: 2 g
+    n_ics: 3
+  conn_usb:
+    model: connector
+    type: peripheral
+    weight: 1.5 g
+    n_ics: 1
+  mosfet:
+    model: transistor
+    type: generic
+    weight: 0.01 g
+    n_ics: 2
+  active_misc:
+    model: active
+    type: generic
+    weight: 1 g
+    n_ics: 1
+  passive_misc:
+    model: passive
+    type: generic
+    weight: 1 g
+    n_ics: 1

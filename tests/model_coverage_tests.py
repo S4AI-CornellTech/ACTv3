@@ -8,7 +8,7 @@ from act.core.carbon import SourceType
 from act.core.common import AbatementLevel, CapacitorType, ModelType
 from act.core.device_data import DeviceData
 from act.core.models.ap_model import APModel
-from act.core.models.capacitor_model import CapacitorModel
+from act.core.models.passives_model import CapacitorModel
 from act.core.models.ci_model import CIModel
 from act.core.models.dram_model import DRAMModel
 from act.core.models.hdd_model import HDDModel

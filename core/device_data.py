@@ -11,10 +11,10 @@ import pint
 from act.core.carbon import SourceType
 from act.core.common import (
     AbatementLevel,
-    CapacitorType,
     DEFAULT_FAB_YIELD,
     ModelType,
     NA,
+    PASSIVE_MODEL_TYPES,
 )
 from act.core.models.ci_model import DEFAULT_BUILD_YEAR, DEFAULT_FAB_LOCATION
 from act.core.processes import (
@@ -163,21 +163,22 @@ class DeviceData:
         else:  # by default convert with logic process for now
             self.process = LogicProcess.NA
 
-        if self.model is ModelType.CAPACITOR:
+        if PASSIVE_MODEL_TYPES.get(self.model) is not None:
+            type_enum = PASSIVE_MODEL_TYPES[self.model]
+            valid_types = ", ".join(t.value for t in type_enum)
             if self.type:
                 try:
-                    self.type = CapacitorType(self.type)
+                    self.type = type_enum(self.type)
                 except ValueError:
-                    valid_types = ", ".join(t.value for t in CapacitorType)
                     log.critical(
-                        f"Device '{self.name}': Unsupported capacitor type '{self.type}'. "
-                        f"Valid capacitor types are: {valid_types}"
+                        f"Device '{self.name}': Unsupported {self.model.value} type '{self.type}'. "
+                        f"Valid {self.model.value} types are: {valid_types}"
                     )
                     exit(-1)
             else:
                 log.critical(
-                    f"Device '{self.name}': Capacitor type must be specified. "
-                    f"Valid capacitor types are: {', '.join(t.value for t in CapacitorType)}"
+                    f"Device '{self.name}': {self.model.value} type must be specified. "
+                    f"Valid {self.model.value} types are: {valid_types}"
                 )
                 exit(-1)
         elif self.model is ModelType.MATERIALS:

@@ -40,6 +40,11 @@ class ModelType(Enum):
     CAPACITOR = "capacitor"
     RESISTOR = "resistor"
     DIODE = "diode"
+    INDUCTOR = "inductor"
+    CONNECTOR = "connector"
+    TRANSISTOR = "transistor"
+    ACTIVE = "active"
+    PASSIVE = "passive"
     PCB = "pcb"
     BATTERY = "battery"
     SIGNAL_BEAD = "signal bead"
@@ -52,12 +57,56 @@ class CapacitorType(Enum):
     TEC = "tec"
 
 
-PASSIVE_MODEL_TYPES = [
-    ModelType.CAPACITOR,
-    ModelType.RESISTOR,
-    ModelType.DIODE,
-    ModelType.SIGNAL_BEAD,
-]
+class ResistorType(Enum):
+    PKG_0805 = "0805"
+    PKG_0201 = "0201"
+    PKG_0402 = "0402"
+    PKG_0603 = "0603"
+
+
+class InductorType(Enum):
+    PKG_0805 = "0805"
+    PKG_0201 = "0201"
+    PKG_0402 = "0402"
+    PKG_0603 = "0603"
+    WEIGHT_BASED = "weight_based"
+
+
+class DiodeType(Enum):
+    GLASS_SMD = "glass_smd"
+    LED = "led"
+
+
+class ConnectorType(Enum):
+    PCI = "pci"
+    PERIPHERAL = "peripheral"
+
+
+class TransistorType(Enum):
+    GENERIC = "generic"
+
+
+class ActiveType(Enum):
+    GENERIC = "generic"
+
+
+class PassiveType(Enum):
+    GENERIC = "generic"
+
+
+# maps each discrete component model type to the enum used to cast its device "type" field
+PASSIVE_MODEL_TYPES = {
+    ModelType.CAPACITOR: CapacitorType,
+    ModelType.RESISTOR: ResistorType,
+    ModelType.INDUCTOR: InductorType,
+    ModelType.DIODE: DiodeType,
+    ModelType.CONNECTOR: ConnectorType,
+    ModelType.TRANSISTOR: TransistorType,
+    ModelType.ACTIVE: ActiveType,
+    ModelType.PASSIVE: PassiveType,
+    ModelType.SIGNAL_BEAD: None,  # no signal bead model or types yet
+}
+
 MATERIALS_MODEL_TYPES = [
     ModelType.MATERIALS,
     ModelType.PCB,
